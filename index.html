@@ -27,7 +27,7 @@
   </script>
 
   <!-- ==========================================
-    2. SWIPER CSS (Untuk Gallery)
+    2. SWIPER CSS (Untuk Gallery, Unit Detail & Testimoni)
   =========================================== -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
@@ -43,40 +43,39 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '2109665896639946'); // <-- GANTI "YOUR_PIXEL_ID" DENGAN ID PIXEL ANDA
+    fbq('init', '2109665896639946');
     fbq('track', 'PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=2109665896639946&ev=PageView&noscript=1"
   /></noscript>
-  <!-- End Meta Pixel Code -->
 
   <!-- ==========================================
     4. CUSTOM STYLES
   =========================================== -->
   <style>
-    /* Memastikan font konsisten meski ditaruh di dalam Elementor */
     .custom-elementor-wrapper { 
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; 
     }
     
-    /* Kustomisasi indikator halaman (titik) Swiper */
-    .gallerySwiper .swiper-pagination-bullet-active {
+    /* Swiper Styling */
+    .gallerySwiper .swiper-pagination-bullet-active,
+    .testimonialSwiper .swiper-pagination-bullet-active,
+    .unitDetailSwiper .swiper-pagination-bullet-active {
       background-color: #0b6b6d !important;
+      opacity: 1;
     }
-    .gallerySwiper .swiper-pagination-bullet {
+    .gallerySwiper .swiper-pagination-bullet,
+    .testimonialSwiper .swiper-pagination-bullet,
+    .unitDetailSwiper .swiper-pagination-bullet {
       background-color: #11a1a5;
       opacity: 0.5;
     }
-    .gallerySwiper .swiper-pagination-bullet-active {
-      opacity: 1;
-    }
     .gallerySwiper {
-      padding-bottom: 3rem !important; /* Memberi ruang untuk titik navigasi */
+      padding-bottom: 3rem !important;
       padding-left: 0.5rem;
       padding-right: 0.5rem;
     }
-    /* Mengatur gaya tombol panah (Next/Prev) */
     .gallerySwiper .swiper-button-next,
     .gallerySwiper .swiper-button-prev {
       color: #0b6b6d;
@@ -93,34 +92,37 @@
       font-weight: bold;
     }
 
-    /* Kustomisasi indikator halaman (titik) untuk Testimoni */
-    .testimonialSwiper .swiper-pagination-bullet-active {
-      background-color: #0b6b6d !important;
+    /* Pulse animation for floating WA button */
+    @keyframes pulse-border {
+      0% {
+        box-shadow: 0 0 0 0 rgba(17, 161, 165, 0.6);
+      }
+      70% {
+        box-shadow: 0 0 0 15px rgba(17, 161, 165, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(17, 161, 165, 0);
+      }
     }
-    .testimonialSwiper .swiper-pagination-bullet {
-      background-color: #11a1a5;
-      opacity: 0.5;
-    }
-    .testimonialSwiper .swiper-pagination-bullet-active {
-      opacity: 1;
+    .pulse-wa {
+      animation: pulse-border 2s infinite;
     }
   </style>
-
 </head>
 <body class="antialiased bg-gray-50 text-gray-800">
 
   <!-- WRAPPER UTAMA -->
-  <div class="custom-elementor-wrapper overflow-x-hidden">
+  <div class="custom-elementor-wrapper overflow-x-hidden relative">
 
     <!-- ==========================================
       HERO SECTION
     =========================================== -->
-    <section class="bg-gray-50 pt-10 pb-16 md:pt-16 md:pb-24 overflow-hidden">
+    <section class="bg-gray-50 pt-8 pb-16 md:pt-14 md:pb-24 overflow-hidden">
       
       <!-- Bagian Atas: Gambar Fasad Rumah Penuh -->
       <div class="w-full max-w-7xl mx-auto px-4 md:px-8 lg:px-16 mb-10 md:mb-16">
         <div class="rounded-3xl overflow-hidden shadow-2xl relative w-full">
-          <img src="https://sspsaltriver.com/wp-content/uploads/2026/06/Diskon-Unit-Terbatas-1.jpg" alt="Fasad Rumah Premium" class="w-full h-auto block">
+          <img src="https://sspsaltriver.com/wp-content/uploads/2026/06/Diskon-Unit-Terbatas-1.jpg" alt="Fasad Rumah Premium SSP Saltriver" class="w-full h-auto block">
         </div>
       </div>
 
@@ -188,13 +190,46 @@
                 </li>
               </ul>
               
-              <!-- Tombol CTA Selengkapnya (Anchor to Gallery) -->
-              <a href="#gallery" class="flex justify-center items-center w-full bg-gradient-to-r from-[#a6353c] to-[#8b2b31] hover:from-[#8b2b31] hover:to-[#6b2126] text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 shadow-[0_8px_20px_-6px_rgba(166,53,60,0.6)] hover:shadow-[0_12px_25px_-8px_rgba(166,53,60,0.7)] transform hover:-translate-y-1 text-lg uppercase tracking-widest gap-2">
+              <!-- Tombol CTA Selengkapnya -->
+              <a href="#lingkungan" class="flex justify-center items-center w-full bg-gradient-to-r from-[#a6353c] to-[#8b2b31] hover:from-[#8b2b31] hover:to-[#6b2126] text-white font-black py-4 px-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1 text-lg uppercase tracking-widest gap-2">
                 Selengkapnya
                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
               </a>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+      LOKASI & MASTER PLAN SECTION
+    =========================================== -->
+    <section id="lokasi-masterplan" class="py-16 md:py-20 bg-gray-50 border-t border-gray-200">
+      <div class="container mx-auto px-4 max-w-xl text-center">
+        <div class="mb-8">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0b6b6d] mb-3">Lokasi & Master Plan</h2>
+          <p class="text-gray-600 text-base md:text-lg">Petunjuk lokasi presisi dan pengembangan tata ruang kawasan SSP Saltriver.</p>
+        </div>
+
+        <!-- Gambar Maps Ratio 1:1 -->
+        <div class="w-full aspect-[1/1] rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-gray-200 mb-8 mx-auto relative group">
+          <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Maps-Lokasi-SSP.jpg" alt="Peta Lokasi SSP Saltriver" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          <div class="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300"></div>
+        </div>
+
+        <!-- 2 Tombol (Master Plan & Google Maps) -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <!-- Tombol Master Plan -->
+          <button type="button" onclick="openMasterPlanModal()" class="w-full sm:w-auto min-w-[200px] bg-[#0e273c] hover:bg-[#11a1a5] text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2.5 uppercase tracking-wider text-sm cursor-pointer">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+            Master Plan
+          </button>
+          
+          <!-- Tombol Google Maps -->
+          <a href="https://maps.app.goo.gl/rvwLdje1CQAuZCHy9" target="_blank" class="w-full sm:w-auto min-w-[200px] bg-[#a6353c] hover:bg-[#8b2b31] text-white font-bold py-4 px-6 rounded-2xl transition-all duration-300 shadow-md hover:shadow-lg flex items-center justify-center gap-2.5 uppercase tracking-wider text-sm">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            Google Maps
+          </a>
         </div>
       </div>
     </section>
@@ -226,28 +261,29 @@
             <!-- Foto 3 -->
             <div class="swiper-slide">
               <div class="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
-                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/bedroom-utama.jpg" alt="Ruang TV" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/bedroom-utama.jpg" alt="Kamar Utama" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
               </div>
             </div>
             <!-- Foto 4 -->
             <div class="swiper-slide">
               <div class="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
-                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/kamar-anak.jpg" alt="Ruang Makan" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/kamar-anak.jpg" alt="Kamar Anak" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
               </div>
             </div>
             <!-- Foto 5 -->
             <div class="swiper-slide">
               <div class="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
-                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/bathroom.jpg" alt="Dapur" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/bathroom.jpg" alt="Kamar Mandi" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
               </div>
             </div>
             <!-- Foto 6 -->
             <div class="swiper-slide">
               <div class="w-full aspect-[4/5] rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 group cursor-pointer">
-                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/stairs.jpg" alt="Sudut Ruangan" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/stairs.jpg" alt="Tangga Minimalis" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
               </div>
             </div>
-            <!-- Navigasi Slider -->
+          </div>
+          <!-- Navigasi Slider -->
           <div class="swiper-pagination"></div>
           <div class="swiper-button-prev hidden md:flex"></div>
           <div class="swiper-button-next hidden md:flex"></div>
@@ -256,44 +292,52 @@
     </section>
 
     <!-- ==========================================
-      STORYLINE / LIFESTYLE SECTION (BARU)
+      STORYLINE / LIFESTYLE SECTION
     =========================================== -->
-    <section class="py-20 bg-gray-50 border-t border-gray-100">
+    <section id="lingkungan" class="py-20 bg-gray-50 border-t border-gray-100">
       <div class="container mx-auto px-4 max-w-7xl">
-        <div class="flex flex-col lg:flex-row gap-8 lg:gap-6 items-center justify-center">
+        
+        <div class="text-center mb-14">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0b6b6d] mb-4">Lingkungan Asri & Nyaman</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto text-base md:text-lg">Kualitas hunian yang dirancang untuk mendukung gaya hidup harmonis keluarga Anda.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           
-          <!-- Image 1 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
-            <!-- Ganti URL src di bawah dengan link gambar Anda -->
-            <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/fasad-1-b.jpg" alt="Experience 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+          <!-- Card 1 -->
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow">
+            <div class="w-full aspect-[4/3] overflow-hidden group">
+              <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/fasad-1-b.jpg" alt="Fasad Rumah" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 flex-grow flex items-center">
+              <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
+                Bagi banyak keluarga mapan, rumah bukan hanya tempat tinggal. Rumah adalah aset jangka panjang, ruang tumbuh keluarga, sekaligus keputusan yang harus tetap relevan bertahun-tahun ke depan.
+              </p>
+            </div>
           </div>
 
-          <!-- Paragraf 1 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 text-gray-700 text-base leading-relaxed text-center font-medium px-4">
-            <p>Bagi banyak keluarga mapan, rumah bukan hanya tempat tinggal. Rumah adalah aset jangka panjang, ruang tumbuh keluarga, sekaligus keputusan yang harus tetap relevan bertahun-tahun ke depan. Karena itu, kami percaya bahwa kualitas sebuah hunian tidak hanya ditentukan oleh bangunannya, tetapi juga oleh lingkungan tempatnya berada.</p>
+          <!-- Card 2 -->
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow">
+            <div class="w-full aspect-[4/3] overflow-hidden group">
+              <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/fasad-1-a.jpg" alt="Suasana Perumahan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 flex-grow flex items-center">
+              <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
+                Lingkungan yang tidak terlalu padat menciptakan suasana hidup yang lebih tenang. Aktivitas lebih tertata dan ruang bersama dapat dinikmati dengan lebih optimal oleh setiap anggota keluarga.
+              </p>
+            </div>
           </div>
 
-          <!-- Image 2 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
-            <!-- Ganti URL src di bawah dengan link gambar Anda -->
-            <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/fasad-1-a.jpg" alt="Experience 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
-          </div>
-
-          <!-- Paragraf 2 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 text-gray-700 text-base leading-relaxed text-center font-medium px-4">
-            <p>Lingkungan yang tidak terlalu padat menciptakan suasana hidup yang lebih nyaman. Aktivitas lebih tertata, lalu lintas internal lebih tenang, dan ruang bersama dapat dinikmati dengan lebih optimal. Bagi keluarga profesional, ASN, pengusaha, maupun karyawan BUMN yang menjalani rutinitas padat setiap hari, kenyamanan seperti ini menjadi nilai yang semakin penting.</p>
-          </div>
-
-          <!-- Image 3 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
-            <!-- Ganti URL src di bawah dengan link gambar Anda -->
-            <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/lingkungan.jpg" alt="Experience 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
-          </div>
-
-          <!-- Image 4 -->
-          <div class="w-full sm:w-2/3 md:w-1/2 lg:w-1/5 aspect-[4/5] rounded-2xl overflow-hidden shadow-lg group">
-            <!-- Ganti URL src di bawah dengan link gambar Anda -->
-            <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Mudah-Punya-Rumah-1.jpg" alt="Experience 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+          <!-- Card 3 -->
+          <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition-shadow md:col-span-2 lg:col-span-1">
+            <div class="w-full aspect-[4/3] overflow-hidden group">
+              <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/lingkungan.jpg" alt="Taman Lingkungan" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-6 flex-grow flex items-center">
+              <p class="text-gray-700 text-sm md:text-base leading-relaxed font-medium">
+                Bagi profesional, ASN, pengusaha, maupun karyawan BUMN yang menjalani rutinitas padat, kenyamanan dan kesejukan udara kawasan ini menjadi nilai istimewa saat melepas penat.
+              </p>
+            </div>
           </div>
 
         </div>
@@ -301,7 +345,7 @@
     </section>
 
     <!-- ==========================================
-      TESTIMONI SECTION (BARU)
+      TESTIMONI SECTION
     =========================================== -->
     <section class="py-20 bg-white border-t border-gray-100">
       <div class="container mx-auto px-4 max-w-7xl">
@@ -317,19 +361,13 @@
             <!-- Slide Testimoni 1 -->
             <div class="swiper-slide h-auto">
               <div class="bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow duration-300">
-                <!-- Foto 4:5 -->
                 <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-5">
-                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Testimoni-Penghuni-Ibu-Umi-Dati_1-(Kavling-B7).jpg" alt="Testimoni 1" class="w-full h-full object-cover">
+                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Testimoni-Penghuni-Ibu-Umi-Dati_1-(Kavling-B7).jpg" alt="Ibu Umi Dati" class="w-full h-full object-cover">
                 </div>
-                <!-- Konten Teks -->
                 <div class="flex-grow flex flex-col justify-between px-2 pb-2">
-                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">"Alhamdulillah, sejak tahun 2018 saya dan keluarga merasa nyaman tinggal di sini. Lokasinya sangat strategis, ke pusat kota dekat dan akses ke mana-mana juga mudah.
-
-Air di sini bersih, jernih, dan layak digunakan untuk kebutuhan sehari-hari, termasuk air minum. Udaranya juga masih segar sehingga membuat lingkungan terasa lebih sehat dan nyaman.
-
-Selain itu, tanahnya subur. Saya bisa menanam berbagai tanaman tanpa perlu banyak pupuk dan hasilnya tetap bagus.
-
-Menurut saya, siapa pun boleh bekerja di mana saja, tapi tempat untuk pulang harus memberikan rasa nyaman. Dan sampai sekarang, saya merasa sudah menemukan kenyamanan itu di Salt River."</p>
+                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">
+                    "Alhamdulillah, sejak tahun 2018 saya dan keluarga merasa nyaman tinggal di sini. Lokasinya sangat strategis, ke pusat kota dekat dan akses ke mana-mana juga mudah. Air di sini bersih, jernih, dan udaranya segar."
+                  </p>
                   <div>
                     <h4 class="font-bold text-[#0b6b6d] text-lg">Ibu Umi Dati</h4>
                     <p class="text-xs text-[#11a1a5] font-semibold uppercase tracking-wide">(Kavling B7)</p>
@@ -348,19 +386,13 @@ Menurut saya, siapa pun boleh bekerja di mana saja, tapi tempat untuk pulang har
             <!-- Slide Testimoni 2 -->
             <div class="swiper-slide h-auto">
               <div class="bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow duration-300">
-                <!-- Foto 4:5 -->
                 <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-5">
-                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Ibu-Chisil_1-(Kavling-C9).jpg" alt="Testimoni 2" class="w-full h-full object-cover">
+                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Ibu-Chisil_1-(Kavling-C9).jpg" alt="Ibu Chisil" class="w-full h-full object-cover">
                 </div>
-                <!-- Konten Teks -->
                 <div class="flex-grow flex flex-col justify-between px-2 pb-2">
-                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">"Sejak tahun 2020 saya dan keluarga merasa sangat nyaman tinggal di Salt River. Lingkungannya aman, tenang, dan suasananya sejuk karena kualitas udaranya masih sangat baik.
-
-Selain itu, kualitas air di sini juga bersih dan bagus untuk kebutuhan sehari-hari. Menurut saya, ini menjadi salah satu keunggulan yang sulit ditemukan di beberapa kawasan lain.
-
-Lokasinya juga sangat strategis. Ke mana-mana lebih dekat dan aksesnya mudah, sehingga aktivitas sehari-hari menjadi lebih praktis dan efisien.
-
-Itulah alasan saya memilih tinggal di Salt River. Huniannya nyaman, lingkungannya menyenangkan, dan mobilitas menjadi lebih mudah. Sampai sekarang saya merasa betah tinggal di sini dan tidak menyesal telah memilih Salt River sebagai tempat tinggal."</p>
+                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">
+                    "Sejak tahun 2020 saya dan keluarga merasa sangat nyaman tinggal di Salt River. Lingkungannya aman, tenang, dan suasananya sejuk. Ke mana-mana lebih dekat dan aksesnya mudah, sehingga mobilitas harian lebih praktis."
+                  </p>
                   <div>
                     <h4 class="font-bold text-[#0b6b6d] text-lg">Ibu Chisil</h4>
                     <p class="text-xs text-[#11a1a5] font-semibold uppercase tracking-wide">(Kavling C9)</p>
@@ -379,19 +411,13 @@ Itulah alasan saya memilih tinggal di Salt River. Huniannya nyaman, lingkunganny
             <!-- Slide Testimoni 3 -->
             <div class="swiper-slide h-auto">
               <div class="bg-gray-50 rounded-2xl p-4 shadow-sm border border-gray-100 flex flex-col h-full hover:shadow-md transition-shadow duration-300">
-                <!-- Foto 4:5 -->
                 <div class="w-full aspect-[4/5] rounded-xl overflow-hidden mb-5">
-                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Pak-Aldi_2-(Kavling-B23).jpg" alt="Testimoni 3" class="w-full h-full object-cover">
+                  <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Pak-Aldi_2-(Kavling-B23).jpg" alt="Pak Aldi" class="w-full h-full object-cover">
                 </div>
-                <!-- Konten Teks -->
                 <div class="flex-grow flex flex-col justify-between px-2 pb-2">
-                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">"Saya sudah tinggal di Salt River sejak tahun 2021. Salah satu alasan memilih tinggal di sini karena lokasinya dekat dengan orang tua saya yang berada di Cimahi, sehingga lebih mudah untuk berkunjung kapan saja.
-
-Yang paling saya sukai adalah suasananya. Udaranya sejuk, segar, dan masih banyak pepohonan karena berada di dataran yang lebih tinggi. Rasanya seperti tinggal di kawasan villa, tenang, nyaman, dan jauh dari hiruk pikuk.
-
-Walaupun suasananya asri, lokasinya tetap strategis. Tidak terlalu jauh dari pusat kota, jadi aktivitas sehari-hari tetap mudah dan akses ke mana-mana sangat praktis.
-
-Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengalami kendala. Lingkungan perumahannya juga lebih private dengan sistem keamanan yang baik, sehingga membuat saya dan keluarga merasa lebih aman dan nyaman tinggal di Salt River."</p>
+                  <p class="text-gray-600 text-sm md:text-base italic leading-relaxed mb-5">
+                    "Yang paling saya sukai adalah suasananya. Udaranya sejuk, segar, dan rasanya seperti tinggal di villa, tenang dan jauh dari hiruk pikuk. Keamanan One Gate System membuat keluarga merasa sangat tenang."
+                  </p>
                   <div>
                     <h4 class="font-bold text-[#0b6b6d] text-lg">Pak Aldi</h4>
                     <p class="text-xs text-[#11a1a5] font-semibold uppercase tracking-wide">(Kavling B23)</p>
@@ -415,9 +441,124 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
     </section>
 
     <!-- ==========================================
+      DETAIL UNIT SHOWCASE (SECTION BARU REFERENSI)
+    =========================================== -->
+    <section class="py-16 md:py-20 bg-[#f7f5f0] border-t border-gray-200">
+      <div class="container mx-auto px-4 max-w-6xl">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Image Slider Container (Ratio 3:4) -->
+          <div class="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none">
+            <div class="relative rounded-3xl overflow-hidden shadow-xl group bg-gray-200">
+              <div class="swiper unitDetailSwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="w-full aspect-[3/4] overflow-hidden">
+                      <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/kamar-anak.jpg" alt="Interior Kamar SSP Saltriver" class="w-full h-full object-cover">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="w-full aspect-[3/4] overflow-hidden">
+                      <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/livingroom-1.jpg" alt="Living Room SSP Saltriver" class="w-full h-full object-cover">
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="w-full aspect-[3/4] overflow-hidden">
+                      <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/fasad-1-b.jpg" alt="Fasad Unit SSP Saltriver" class="w-full h-full object-cover">
+                    </div>
+                  </div>
+                </div>
+                <!-- Slider Navigation -->
+                <div class="swiper-button-prev !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/30 hover:!bg-white/70 !backdrop-blur-md !text-gray-800 rounded-full !left-4 border border-white/50 transition-all shadow-md"></div>
+                <div class="swiper-button-next !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/30 hover:!bg-white/70 !backdrop-blur-md !text-gray-800 rounded-full !right-4 border border-white/50 transition-all shadow-md"></div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Details Grid -->
+          <div class="lg:col-span-7 flex flex-col justify-between pt-2">
+            <div>
+              <span class="text-xs md:text-sm font-semibold tracking-wider text-gray-500 uppercase block mb-1">SSP Saltriver - Landed House</span>
+              <h3 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
+                Saltriver 2 Lantai
+              </h3>
+              
+              <!-- Tombol Akses (Pill Style) -->
+              <div class="flex flex-wrap gap-2.5 md:gap-3 mb-8">
+                <!-- Brochure Button (Opens Form Modal) -->
+                <button type="button" onclick="openBrochureModal()" class="px-5 py-2.5 rounded-full bg-[#0e273c] hover:bg-[#11a1a5] text-white text-xs md:text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center gap-2 cursor-pointer">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  BROCHURE
+                </button>
+                <!-- Floor Plan Button (Opens Image Modal) -->
+                <button type="button" onclick="openFloorPlanModal()" class="px-5 py-2.5 rounded-full bg-[#0e273c] hover:bg-[#11a1a5] text-white text-xs md:text-sm font-bold uppercase tracking-wider transition-all shadow-sm cursor-pointer">
+                  FLOOR PLAN
+                </button>
+              </div>
+            </div>
+
+            <!-- Layout Fasilitas & Ukuran -->
+            <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl border border-gray-200/90 shadow-sm">
+              <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Facilities</h4>
+              
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-y-4 gap-x-3 mb-6 text-gray-800 text-sm font-medium">
+                
+                <!-- 3 Bedroom -->
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-5 h-5 text-[#0b6b6d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 10h18M3 14h18M5 6h14a2 2 0 012 2v10H3V8a2 2 0 012-2z"></path></svg>
+                  <span>3 Bedroom</span>
+                </div>
+
+                <!-- 2 Bathroom -->
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-5 h-5 text-[#0b6b6d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v16M2 17h20M6 8v9"></path></svg>
+                  <span>2 Bathroom</span>
+                </div>
+
+                <!-- Carport -->
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-5 h-5 text-[#0b6b6d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 17a2 2 0 100 4 2 2 0 000-4zm8 0a2 2 0 100 4 2 2 0 000-4zM3 9l2-4h14l2 4M3 9v7a1 1 0 001 1h16a1 1 0 001-1V9M3 9h18"></path></svg>
+                  <span>Carport</span>
+                </div>
+
+                <!-- Living Room -->
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-5 h-5 text-[#0b6b6d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                  <span>Living Room</span>
+                </div>
+
+                <!-- Kitchen -->
+                <div class="flex items-center gap-2.5">
+                  <svg class="w-5 h-5 text-[#0b6b6d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                  <span>Kitchen</span>
+                </div>
+
+              </div>
+
+              <!-- Batas Garis & Luas Area -->
+              <div class="border-t border-gray-300/80 pt-4 flex flex-wrap justify-between items-center text-sm md:text-base font-medium text-gray-700 gap-4">
+                <div>
+                  Building Area: <span class="font-extrabold text-gray-900">60 m²</span>
+                </div>
+                <div>
+                  Land Area: <span class="font-extrabold text-gray-900">72 m²</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
       DENAH HUNIAN & SPESIFIKASI SECTION
     =========================================== -->
-    <section class="py-20 bg-white border-t border-gray-100">
+    <section id="denah" class="py-20 bg-white border-t border-gray-100">
       <div class="container mx-auto px-4 max-w-7xl">
         <div class="text-center mb-12 lg:mb-16">
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0b6b6d] mb-4">Denah Hunian & Spesifikasi</h2>
@@ -438,29 +579,34 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
           </div>
 
           <!-- Teks Spesifikasi -->
-          <div class="w-full h-full flex flex-col justify-start lg:justify-center text-gray-800 text-sm md:text-base leading-relaxed space-y-6 lg:pl-2 pt-4 lg:pt-0">
-            <div class="space-y-1">
-              <p><span class="text-gray-800">Pondasi : Strausspile</span></p>
-              <p><span class="text-gray-800">Struktur : Bertulang</span></p>
-              <p><span class="text-gray-800">Dinding : Bata Merah & Hebel</span></p>
-              <p><span class="text-gray-800">Plafond : Gypsum</span></p>
-              <p><span class="text-gray-800">Atap : Baja Ringan</span></p>
-              <p><span class="text-gray-800">Lantai : Granite Tile</span></p>
-              <p><span class="text-gray-800">Sanitray : TOTO</span></p>
-            </div>
-            <div class="space-y-1">
-              <p><span class="text-gray-800">Listrik : 1300W</span></p>
-              <p><span class="text-gray-800">Sumur : Bor Lokal</span></p>
-              <p><span class="text-gray-800">Torn : 500L</span></p>
-            </div>
-            <div class="space-y-1">
-              <p><span class="text-gray-800">Kitchen Set</span></p>
-              <p><span class="text-gray-800">Kusen : Alumunium</span></p>
-              <p><span class="text-gray-800">Jendela : Alumunium</span></p>
-              <p><span class="text-gray-800">Kaca : Clear 5mm</span></p>
-              <p><span class="text-gray-800">Pintu : Panel Kayu</span></p>
-              <p><span class="text-gray-800">Cat : Mowilex atau setara</span></p>
-              <p><span class="text-gray-800">Kunci : Dekson</span></p>
+          <div class="w-full h-full flex flex-col justify-start lg:justify-center text-gray-800 text-sm md:text-base leading-relaxed space-y-6 lg:pl-2 pt-4 lg:pt-0 sm:col-span-2 lg:col-span-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div class="space-y-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-[#0b6b6d] mb-2">Konstruksi</h4>
+                <p><span class="text-gray-700">Pondasi: Strausspile</span></p>
+                <p><span class="text-gray-700">Struktur: Bertulang</span></p>
+                <p><span class="text-gray-700">Dinding: Bata Merah & Hebel</span></p>
+                <p><span class="text-gray-700">Plafond: Gypsum</span></p>
+                <p><span class="text-gray-700">Atap: Baja Ringan</span></p>
+                <p><span class="text-gray-700">Lantai: Granite Tile</span></p>
+                <p><span class="text-gray-700">Sanitary: TOTO</span></p>
+              </div>
+              <div class="space-y-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-[#0b6b6d] mb-2">Utilitas</h4>
+                <p><span class="text-gray-700">Listrik: 1300W</span></p>
+                <p><span class="text-gray-700">Sumur: Bor Lokal</span></p>
+                <p><span class="text-gray-700">Torn: 500L</span></p>
+              </div>
+              <div class="space-y-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <h4 class="font-bold text-[#0b6b6d] mb-2">Finishing</h4>
+                <p><span class="text-gray-700">Kitchen Set</span></p>
+                <p><span class="text-gray-700">Kusen: Alumunium</span></p>
+                <p><span class="text-gray-700">Jendela: Alumunium</span></p>
+                <p><span class="text-gray-700">Kaca: Clear 5mm</span></p>
+                <p><span class="text-gray-700">Pintu: Panel Kayu</span></p>
+                <p><span class="text-gray-700">Cat: Mowilex / setara</span></p>
+                <p><span class="text-gray-700">Kunci: Dekson</span></p>
+              </div>
             </div>
           </div>
         </div>
@@ -502,7 +648,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
           </div>
           <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 group cursor-pointer border border-gray-100">
             <div class="relative h-56 md:h-64 overflow-hidden">
-              <img src="https://sspsaltriver.com/wp-content/uploads/2026/05/GOR.jpg" alt="Fasilitas Pendidikan" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
+              <img src="https://sspsaltriver.com/wp-content/uploads/2026/05/GOR.jpg" alt="GOR Badminton" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-in-out">
               <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
             </div>
             <div class="bg-[#0b6b6d] py-4 text-center border-t-4 border-[#11a1a5]">
@@ -525,7 +671,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
               <p class="text-gray-500 text-sm md:text-base font-bold tracking-[0.2em] uppercase">Hunian Classic di Lokasi Strategis</p>
             </div>
             <div class="bg-[#0b6b6d] rounded-3xl shadow-2xl flex flex-col overflow-hidden relative aspect-[4/5] transform hover:-translate-y-1 transition-all duration-300">
-              <img src="http://sspsaltriver.lagikreatif.com/wp-content/uploads/2026/05/Hunian-eksklusif.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Hunian Eksklusif">
+              <img src="https://sspsaltriver.lagikreatif.com/wp-content/uploads/2026/05/Hunian-eksklusif.jpg" class="absolute inset-0 w-full h-full object-cover" alt="Hunian Eksklusif SSP Saltriver">
               <div class="absolute top-6 right-6 z-20 bg-white/40 backdrop-blur-sm p-2 rounded-full border border-white/60 shadow-sm">
                 <svg class="w-8 h-8 text-[#0b6b6d]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
               </div>
@@ -537,12 +683,14 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
               </div>
             </div>
           </div>
+          
           <div class="flex flex-col justify-center lg:pl-6 text-center lg:text-left">
             <div class="mb-6">
               <p class="text-gray-600 text-lg md:text-xl font-medium mb-1">Hanya dengan</p>
               <h2 class="text-5xl md:text-6xl font-black text-[#0b6b6d] mb-4 tracking-tight drop-shadow-sm">Rp5 juta</h2>
               <p class="text-gray-800 text-lg md:text-xl font-semibold">Anda sudah bisa booking Hunian Mewah & Asri</p>
             </div>
+            
             <ul class="space-y-3 mb-6 text-left mx-auto lg:mx-0 inline-block w-full max-w-md">
               <li class="flex items-center gap-3 group">
                 <div class="bg-[#11a1a5] rounded-md p-1 flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform duration-300"><svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
@@ -561,6 +709,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
                 <span class="text-gray-700 font-medium text-base md:text-lg">Sudah SHM</span>
               </li>
             </ul>
+
             <p class="text-gray-800 font-bold text-lg mb-4 text-left mx-auto lg:mx-0 w-full max-w-md">Fasilitas super lengkap:</p>
             <ul class="space-y-3 mb-8 text-left mx-auto lg:mx-0 inline-block w-full max-w-md">
               <li class="flex items-start gap-3 group">
@@ -584,12 +733,15 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
                 <span class="text-gray-700 font-medium text-base md:text-lg leading-tight">Bonus Kitchen Set, Canopy, Water Heater, Kompor Tanam</span>
               </li>
             </ul>
+
             <p class="text-sm text-gray-500 italic mb-8 border-b border-gray-200 pb-6">*S&K Berlaku</p>
+
             <div class="mb-8">
               <p class="text-gray-700 text-lg md:text-xl mb-2 font-medium">Miliki sekarang juga!</p>
               <p class="font-extrabold text-[#a6353c] text-2xl md:text-3xl uppercase tracking-wider drop-shadow-sm">STOK SANGAT TERBATAS!</p>
             </div>
-            <a href="https://wa.me/6282343505823?text=Halo,%20saya%20tertarik%20dengan%20unit%20Rumah%20SSP%20Saltriver.%20Mau%20survey%20dan%20konsultasi%20dulu" onclick="trackMetaPixelBookNow()" target="_blank" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#11a1a5] to-[#0d8286] hover:from-[#0d8286] hover:to-[#096366] text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-xl w-full md:w-auto ring-4 ring-[#11a1a5]/20">
+
+            <a href="https://wa.me/6282343505823?text=Halo,%20saya%20tertarik%20dengan%20unit%20Rumah%20SSP%20Saltriver.%20Mau%20survey%20dan%20konsultasi%20dulu" onclick="trackMetaPixelBookNow()" target="_blank" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-[#11a1a5] to-[#0d8286] hover:from-[#0d8286] hover:to-[#096366] text-white font-bold py-4 px-10 rounded-2xl transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-xl w-full md:w-auto ring-4 ring-[#11a1a5]/20">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
               </svg>
@@ -656,7 +808,6 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 lg:gap-6">
-          <!-- Fitur Items -->
           <div class="bg-gray-50 rounded-2xl p-4 lg:p-6 text-center hover:shadow-lg transition-shadow duration-300 border border-gray-100 group">
             <div class="flex justify-center transform group-hover:scale-110 transition-transform duration-300 mb-3 lg:mb-4">
               <svg class="w-8 h-8 lg:w-10 lg:h-10 text-[#11a1a5]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.683 3 4 3.683 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"></path><line x1="10" y1="5" x2="8" y2="7"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="7" y1="19" x2="7" y2="21"></line><line x1="17" y1="19" x2="17" y2="21"></line></svg>
@@ -705,7 +856,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
             </div>
             <h4 class="font-semibold text-gray-800 text-sm lg:text-base">Waterpump</h4>
           </div>
-          <div class="bg-gray-50 rounded-2xl p-4 lg:p-6 text-center hover:shadow-lg transition-shadow duration-300 border border-gray-100 group">
+          <div class="bg-gray-50 rounded-2xl p-4 lg:p-6 text-center hover:shadow-lg transition-shadow duration-300 border border-gray-100 group col-span-2 sm:col-span-1">
             <div class="flex justify-center transform group-hover:scale-110 transition-transform duration-300 mb-3 lg:mb-4">
               <svg class="w-8 h-8 lg:w-10 lg:h-10 text-[#11a1a5]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"></path><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect><circle cx="8" cy="12" r="3"></circle></svg>
             </div>
@@ -770,7 +921,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
             <div class="w-16 h-16 md:w-20 md:h-20 rounded-full border-[3px] md:border-4 border-[#fbc02d] flex items-center justify-center mb-4 md:mb-6 transform group-hover:-translate-y-2 transition-transform duration-300">
               <svg class="w-8 h-8 md:w-10 md:h-10 text-[#fbc02d]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 11h-4v4h-4v-4H6v-4h4V6h4v4h4v4z"/></svg>
             </div>
-            <h3 class="text-lg md:text-2xl font-bold text-gray-900 mb-2 md:mb-4">Rumah sakit</h3>
+            <h3 class="text-lg md:text-2xl font-bold text-gray-900 mb-2 md:mb-4">Rumah Sakit</h3>
             <ul class="space-y-1 md:space-y-2 text-gray-700 text-sm md:text-lg">
               <li>RS Cibabat 15 Menit</li>
               <li>RS Dustira 20 Menit</li>
@@ -792,17 +943,6 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
     </section>
 
     <!-- ==========================================
-      AJAKAN PENGISIAN DATA
-    =========================================== -->
-    <section class="py-5 md:py-5 bg-white">
-      <div class="container mx-auto px-4 max-w-4xl text-center">
-        <p class="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto font-medium">
-          Tim marketing kami akan langsung menghubungi Anda melalui WhatsApp.
-        </p>
-      </div>
-    </section>
-
-    <!-- ==========================================
       FINAL CALL TO ACTION SECTION
     =========================================== -->
     <section class="py-16 lg:py-24 bg-gray-50 border-t border-gray-200">
@@ -817,6 +957,9 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
           <div class="w-full lg:w-1/2 text-center lg:text-left">
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#0b6b6d] mb-4 leading-tight">Dapatkan Segera <br class="hidden lg:block">Rumah Impian Anda</h2>
             <p class="text-gray-600 mb-8 text-lg md:text-xl">Dengan harga penawaran terbaik, serta berbagai promo yang ditawarkan khusus untuk Anda.</p>
+            <a href="https://wa.me/6282343505823?text=Halo,%20saya%20tertarik%20dengan%20unit%20Rumah%20SSP%20Saltriver.%20Mau%20survey%20dan%20konsultasi%20dulu" onclick="trackMetaPixelBookNow()" target="_blank" class="inline-flex items-center justify-center gap-3 bg-[#11a1a5] hover:bg-[#0d8286] text-white font-extrabold py-4 px-8 rounded-2xl transition-all shadow-lg text-lg">
+              KONSULTASI GRATIS VIA WA
+            </a>
           </div>
         </div>
       </div>
@@ -830,7 +973,7 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 mb-12">
           <div>
             <div class="flex items-center gap-3 mb-6">
-              <img src="https://sspsaltriver.com/wp-content/uploads/2026/02/cropped-cropped-cropped-ssp-logo-origin-3-1.png" alt="Logo Promo Cimahi" class="w-10 h-10 object-contain" />
+              <img src="https://sspsaltriver.com/wp-content/uploads/2026/02/cropped-cropped-cropped-ssp-logo-origin-3-1.png" alt="Logo SSP Saltriver" class="w-10 h-10 object-contain" />
               <span class="text-2xl font-bold tracking-wider">SSP SALTRIVER</span>
             </div>
             <p class="text-gray-200 text-sm leading-relaxed max-w-md font-light text-justify">
@@ -861,26 +1004,221 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
       </div>
     </footer>
 
-  </div> <!-- End of Wrapper Utama -->
+    <!-- ==========================================
+      MODAL 1: DOWNLOAD BROCHURE FORM
+    =========================================== -->
+    <div id="brochureModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+      <div class="bg-white rounded-3xl max-w-xl w-full p-6 md:p-10 relative shadow-2xl my-8 transform transition-all duration-300 scale-100">
+        <!-- Close Button -->
+        <button type="button" onclick="closeBrochureModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <!-- Title -->
+        <h3 class="text-2xl md:text-3xl font-extrabold text-center text-gray-900 mb-8 tracking-tight">
+          Download Brochure
+        </h3>
+
+        <!-- Form -->
+        <form id="brochureForm" onsubmit="handleBrochureSubmit(event)" class="space-y-4 md:space-y-5 text-left">
+          <!-- Name Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1.5">First Name *</label>
+              <input type="text" required placeholder="Enter First Name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#0e273c] focus:border-transparent outline-none text-sm transition-all">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1.5">Last Name</label>
+              <input type="text" placeholder="Enter Last Name" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#0e273c] focus:border-transparent outline-none text-sm transition-all">
+            </div>
+          </div>
+
+          <!-- Phone & Email Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1.5">Phone Number *</label>
+              <div class="flex">
+                <span class="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-sm font-semibold">62</span>
+                <input type="tel" required placeholder="Enter Phone Number" class="w-full px-4 py-3 rounded-r-xl border border-gray-300 focus:ring-2 focus:ring-[#0e273c] focus:border-transparent outline-none text-sm transition-all">
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1.5">Email *</label>
+              <input type="email" required placeholder="Enter Email" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#0e273c] focus:border-transparent outline-none text-sm transition-all">
+            </div>
+          </div>
+
+          <!-- Property Selection -->
+          <div>
+            <label class="block text-xs font-semibold text-gray-700 mb-1.5">Property *</label>
+            <select class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#0e273c] focus:border-transparent outline-none text-sm text-gray-800 transition-all bg-white">
+              <option value="SSP SALTRIVER - 2 Lantai">SSP SALTRIVER - 2 Lantai</option>
+              <option value="SSP SALTRIVER - 3 Lantai">SSP SALTRIVER - 3 Lantai</option>
+            </select>
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="space-y-3 pt-2 text-xs text-gray-600">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" required class="mt-0.5 rounded border-gray-300 text-[#0e273c] focus:ring-[#0e273c]">
+              <span>By submitting form you agree to our <a href="#" class="font-bold underline text-gray-900">Terms and Conditions</a> and already read and acknowledge our <a href="#" class="font-bold underline text-gray-900">Privacy Policy</a></span>
+            </label>
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" class="mt-0.5 rounded border-gray-300 text-[#0e273c] focus:ring-[#0e273c]">
+              <span>If you would like to sign up for our marketing email to keep up to date with the best offers, please tick this checkbox</span>
+            </label>
+          </div>
+
+          <!-- Download Submit Button -->
+          <div class="pt-4">
+            <button type="submit" class="w-full bg-[#0e273c] hover:bg-[#11a1a5] text-white font-bold py-4 px-6 rounded-full transition-all duration-300 text-sm tracking-widest uppercase shadow-lg hover:shadow-xl">
+              DOWNLOAD
+            </button>
+            <p class="text-[11px] text-gray-400 mt-2 text-center">* ) Form input is required</p>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      MODAL 2: FLOOR PLAN IMAGE MODAL (1:1 Ratio)
+    =========================================== -->
+    <div id="floorPlanModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+      <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl my-8">
+        <!-- Close Button -->
+        <button type="button" onclick="closeFloorPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <h3 class="text-xl md:text-2xl font-bold text-center text-gray-900 mb-4">
+          Floor Plan - Saltriver 2 Lantai
+        </h3>
+
+        <!-- Tab Selector -->
+        <div class="flex justify-center gap-3 mb-4">
+          <button type="button" id="tabLantai1" onclick="switchFloorPlan(1)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all">Lantai 1</button>
+          <button type="button" id="tabLantai2" onclick="switchFloorPlan(2)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all">Lantai 2</button>
+        </div>
+
+        <!-- 1:1 Aspect Ratio Image Container -->
+        <div class="w-full aspect-[1/1] bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 p-3 flex items-center justify-center">
+          <img id="floorPlanImage" src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-1.jpg" alt="Floor Plan SSP Saltriver" class="w-full h-full object-contain transition-all duration-300">
+        </div>
+
+        <div class="mt-4 text-center">
+          <a href="https://wa.me/6282343505823?text=Halo,%20saya%20tertarik%20dengan%20denah%20unit%20SSP%20Saltriver" target="_blank" onclick="trackMetaPixelBookNow()" class="inline-flex items-center gap-2 text-xs font-bold text-[#0b6b6d] hover:underline">
+            Konsultasi Layout via WhatsApp
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========================================
+      MODAL 3: MASTER PLAN MODAL
+    =========================================== -->
+    <div id="masterPlanModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
+      <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative shadow-2xl my-8">
+        <!-- Close Button -->
+        <button type="button" onclick="closeMasterPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+
+        <h3 class="text-xl md:text-2xl font-bold text-center text-gray-900 mb-4">
+          Master Plan SSP Saltriver
+        </h3>
+
+        <!-- Master Plan Image Container -->
+        <div class="w-full aspect-[4/3] bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 p-2 flex items-center justify-center">
+          <img src="https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/fasad-1-b.jpg" alt="Master Plan Site Map SSP Saltriver" class="w-full h-full object-contain">
+        </div>
+
+        <div class="mt-5 text-center">
+          <a href="https://wa.me/6282343505823?text=Halo,%20saya%20tertarik%20dengan%20Master%20Plan%20kawasan%20SSP%20Saltriver" target="_blank" onclick="trackMetaPixelBookNow()" class="inline-flex items-center gap-2 px-6 py-3 bg-[#0b6b6d] hover:bg-[#0d8286] text-white text-xs font-bold uppercase rounded-xl transition-all shadow-md">
+            Konsultasi Master Plan via WhatsApp
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- End Wrapper Utama -->
 
   <!-- ==========================================
     JS SCRIPTS
   =========================================== -->
-  
-  <!-- Script Tracking Meta Pixel Event (AddToCart) -->
   <script>
     let isBookNowTracked = false;
     function trackMetaPixelBookNow() {
       if (!isBookNowTracked) {
         if (typeof fbq === 'function') {
-          fbq('track', 'AddToCart'); // Memicu event AddToCart saat tombol di-klik
+          fbq('track', 'AddToCart');
         }
         isBookNowTracked = true;
       }
     }
+
+    // Modal Master Plan Control
+    function openMasterPlanModal() {
+      document.getElementById('masterPlanModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      trackMetaPixelBookNow();
+    }
+
+    function closeMasterPlanModal() {
+      document.getElementById('masterPlanModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Modal Brochure Control
+    function openBrochureModal() {
+      document.getElementById('brochureModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      trackMetaPixelBookNow();
+    }
+
+    function closeBrochureModal() {
+      document.getElementById('brochureModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function handleBrochureSubmit(e) {
+      e.preventDefault();
+      alert("Terima kasih! Brosur SSP Saltriver sedang diunduh.");
+      closeBrochureModal();
+      // Buka link brosur / WhatsApp
+      window.open('https://wa.me/6282343505823?text=Halo,%20saya%20sudah%20mengisi%20form%20brosur%20SSP%20Saltriver', '_blank');
+    }
+
+    // Modal Floor Plan Control
+    function openFloorPlanModal() {
+      document.getElementById('floorPlanModal').classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      switchFloorPlan(1);
+    }
+
+    function closeFloorPlanModal() {
+      document.getElementById('floorPlanModal').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    function switchFloorPlan(floor) {
+      const img = document.getElementById('floorPlanImage');
+      const btn1 = document.getElementById('tabLantai1');
+      const btn2 = document.getElementById('tabLantai2');
+
+      if (floor === 1) {
+        img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-1.jpg";
+        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all";
+        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all";
+      } else {
+        img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-2.jpg";
+        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all";
+        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all";
+      }
+    }
   </script>
 
-  <!-- Script Swiper Slider -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script>
     function initGallerySlider() {
@@ -908,7 +1246,24 @@ Selain itu, kualitas air di sini bersih dan sampai sekarang tidak pernah mengala
           },
         });
 
-        // Inisialisasi Slider Testimoni Baru
+        new Swiper(".unitDetailSwiper", {
+          slidesPerView: 1,      
+          loop: true,            
+          grabCursor: true,      
+          autoplay: {
+            delay: 4000,         
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: ".unitDetailSwiper .swiper-pagination",
+            clickable: true,
+          },
+          navigation: {
+            nextEl: ".unitDetailSwiper .swiper-button-next",
+            prevEl: ".unitDetailSwiper .swiper-button-prev",
+          },
+        });
+
         new Swiper(".testimonialSwiper", {
           slidesPerView: 1,      
           spaceBetween: 24,      
