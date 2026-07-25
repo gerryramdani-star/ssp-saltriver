@@ -441,7 +441,7 @@
     </section>
 
     <!-- ==========================================
-      DETAIL UNIT SHOWCASE (SECTION BARU REFERENSI)
+      DETAIL UNIT SHOWCASE
     =========================================== -->
     <section class="py-16 md:py-20 bg-[#f7f5f0] border-t border-gray-200">
       <div class="container mx-auto px-4 max-w-6xl">
@@ -1086,7 +1086,7 @@
 
           <!-- Download Submit Button -->
           <div class="pt-4">
-            <button type="submit" class="w-full bg-[#0e273c] hover:bg-[#11a1a5] text-white font-bold py-4 px-6 rounded-full transition-all duration-300 text-sm tracking-widest uppercase shadow-lg hover:shadow-xl">
+            <button type="submit" class="w-full bg-[#0e273c] hover:bg-[#11a1a5] text-white font-bold py-4 px-6 rounded-full transition-all duration-300 text-sm tracking-widest uppercase shadow-lg hover:shadow-xl cursor-pointer">
               DOWNLOAD
             </button>
             <p class="text-[11px] text-gray-400 mt-2 text-center">* ) Form input is required</p>
@@ -1101,7 +1101,7 @@
     <div id="floorPlanModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
       <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl my-8">
         <!-- Close Button -->
-        <button type="button" onclick="closeFloorPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20">
+        <button type="button" onclick="closeFloorPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20 cursor-pointer">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
@@ -1111,8 +1111,8 @@
 
         <!-- Tab Selector -->
         <div class="flex justify-center gap-3 mb-4">
-          <button type="button" id="tabLantai1" onclick="switchFloorPlan(1)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all">Lantai 1</button>
-          <button type="button" id="tabLantai2" onclick="switchFloorPlan(2)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all">Lantai 2</button>
+          <button type="button" id="tabLantai1" onclick="switchFloorPlan(1)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer">Lantai 1</button>
+          <button type="button" id="tabLantai2" onclick="switchFloorPlan(2)" class="px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer">Lantai 2</button>
         </div>
 
         <!-- 1:1 Aspect Ratio Image Container -->
@@ -1135,7 +1135,7 @@
     <div id="masterPlanModal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm overflow-y-auto">
       <div class="bg-white rounded-3xl max-w-2xl w-full p-6 relative shadow-2xl my-8">
         <!-- Close Button -->
-        <button type="button" onclick="closeMasterPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20">
+        <button type="button" onclick="closeMasterPlanModal()" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-2 rounded-full hover:bg-gray-100 transition-colors z-20 cursor-pointer">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
 
@@ -1163,8 +1163,15 @@
     JS SCRIPTS
   =========================================== -->
   <script>
-    // MASUKKAN URL GOOGLE APPS SCRIPT ANDA DI SINI
+    // URL GOOGLE APPS SCRIPT
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPS5JtpSUf2yshiG2mgJydhTNOAg0eUpkZrVZsw335IOB-YRw0wanpnfQprbRvhzI3/exec';
+
+    // URL FILE BROSUR PDF SESUAI PILIHAN PROPERTY
+    // 💡 GANTI LINK DI BAWAH DENGAN LINK DIRECT FILE PDF BROSUR ANDA (Google Drive / Direct Server Link)
+    const BROCHURE_URLS = {
+      'SSP SALTRIVER - 2 Lantai': '[https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%202%20Lantai%20-%20SSP%20Saltriver.pdf](https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%202%20Lantai%20-%20SSP%20Saltriver.pdf)', // Ganti dengan URL PDF Brosur 2 Lantai
+      'SSP SALTRIVER - 3 Lantai': '[https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%203%20Lantai%20-%20SSP%20Saltriver.pdf](https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%203%20Lantai%20-%20SSP%20Saltriver.pdf)'  // Ganti dengan URL PDF Brosur 3 Lantai
+    };
 
     let isBookNowTracked = false;
     function trackMetaPixelBookNow() {
@@ -1211,6 +1218,7 @@
       submitBtn.innerText = "MENGIRIM...";
 
       const formData = new FormData(form);
+      const selectedProperty = formData.get('property');
 
       // Mengirim data ke Google Sheets melalui Apps Script
       fetch(GOOGLE_SCRIPT_URL, {
@@ -1219,9 +1227,24 @@
       })
       .then(response => {
         alert("Terima kasih! Data Anda berhasil disimpan dan brosur SSP Saltriver sedang diunduh.");
+
+        // OTOMATIS DOWNLOAD FILE PDF BROSURsesuai pilihan
+        const pdfUrl = BROCHURE_URLS[selectedProperty] || BROCHURE_URLS['SSP SALTRIVER - 2 Lantai'];
+        if (pdfUrl) {
+          // Buka file/download PDF di tab baru
+          const downloadAnchor = document.createElement('a');
+          downloadAnchor.href = pdfUrl;
+          downloadAnchor.target = '_blank';
+          downloadAnchor.download = `Brosur_${selectedProperty.replace(/\s+/g, '_')}`;
+          document.body.appendChild(downloadAnchor);
+          downloadAnchor.click();
+          document.body.removeChild(downloadAnchor);
+        }
+
         form.reset();
         closeBrochureModal();
-        // Redirect ke WhatsApp
+        
+        // Redirect opsional ke WhatsApp CS
         window.open('https://wa.me/6282343505823?text=Halo,%20saya%20sudah%20mengisi%20form%20brosur%20SSP%20Saltriver', '_blank');
       })
       .catch(error => {
@@ -1253,12 +1276,12 @@
 
       if (floor === 1) {
         img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-1.jpg";
-        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all";
-        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all";
+        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
+        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
       } else {
         img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-2.jpg";
-        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all";
-        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all";
+        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
+        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
       }
     }
   </script>
@@ -1335,3 +1358,18 @@
 
 </body>
 </html>
+```
+
+---
+
+### 🔍 Ringkasan Kode & Cara Mengujinya:
+
+1. **Objek `BROCHURE_URLS` di JavaScript:**
+   ```javascript
+   const BROCHURE_URLS = {
+     'SSP SALTRIVER - 2 Lantai': 'https://link-file-pdf-2-lantai-anda.pdf',
+     'SSP SALTRIVER - 3 Lantai': 'https://link-file-pdf-3-lantai-anda.pdf'
+   };
+   ```
+2. **Logika Pengunduhan Otomatis:**
+   Begitu data tersimpan di Google Sheets, skrip akan membaca pilihan unit pengguna (`SSP SALTRIVER - 2 Lantai` atau `3 Lantai`), lalu secara otomatis memicu perintah *download* file PDF yang sesuai di tab baru, sekaligus membuka link WhatsApp customer service.
