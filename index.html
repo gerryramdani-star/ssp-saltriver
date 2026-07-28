@@ -50,6 +50,7 @@
 
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <!-- Meta Pixel Code -->
     <script>
@@ -163,20 +164,9 @@
               <span class="text-[#a6353c] text-5xl md:text-6xl lg:text-7xl drop-shadow-sm mt-1 inline-block">Rp 932jt-an</span>
             </h1>
 
-            <p class="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed font-medium bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
+            <p class="text-base md:text-lg lg:text-xl text-gray-700 leading-relaxed font-medium bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
               Miliki rumah idaman 2 lantai dengan legalitas terjamin (SHM). Dapatkan penawaran menarik dengan kemudahan angsuran hanya <strong class="text-[#a6353c] font-bold text-xl md:text-2xl">7 Jt-an/bulan</strong>.
             </p>
-
-            <div class="flex flex-wrap items-center gap-4">
-              <a href="https://wa.me/6282343505823?text=Halo,%20saya%20ingin%20jadwal%20survey%20lokasi%20SSP%20Saltriver" target="_blank" onclick="trackMetaPixelBookNow()" class="px-8 py-4 bg-[#11a1a5] hover:bg-[#0d8286] text-white font-extrabold rounded-2xl transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-base md:text-lg uppercase tracking-wider flex items-center gap-3">
-                Jadwal Survey Lokasi
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-              </a>
-              <button onclick="openBrochureModal()" class="px-6 py-4 bg-white hover:bg-gray-100 border border-gray-200 text-[#0b6b6d] font-bold rounded-2xl transition-all shadow-sm text-base flex items-center gap-2">
-                <svg class="w-5 h-5 text-[#11a1a5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                Unduh Brosur
-              </button>
-            </div>
           </div>
 
           <!-- Kolom Kanan: Akses Lokasi -->
@@ -483,7 +473,7 @@
           <!-- Image Slider Container (Ratio 3:4) -->
           <div class="lg:col-span-5 w-full max-w-md mx-auto lg:max-w-none">
             <div class="relative rounded-3xl overflow-hidden shadow-xl group bg-gray-200">
-              <div class="swiper unitDetailSwiper">
+              <div class="swiper unitDetailSwiper relative">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
                     <div class="w-full aspect-[3/4] overflow-hidden">
@@ -517,9 +507,9 @@
                   </div>
                 </div>
                 <!-- Slider Navigation -->
-                <div class="swiper-button-prev !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/30 hover:!bg-white/70 !backdrop-blur-md !text-gray-800 rounded-full !left-4 border border-white/50 transition-all shadow-md"></div>
-                <div class="swiper-button-next !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/30 hover:!bg-white/70 !backdrop-blur-md !text-gray-800 rounded-full !right-4 border border-white/50 transition-all shadow-md"></div>
-                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev unitDetail-prev !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/80 hover:!bg-white !backdrop-blur-md !text-gray-800 rounded-full !left-3 border border-white/50 transition-all shadow-md z-20"></div>
+                <div class="swiper-button-next unitDetail-next !w-10 !h-10 md:!w-12 md:!h-12 !bg-white/80 hover:!bg-white !backdrop-blur-md !text-gray-800 rounded-full !right-3 border border-white/50 transition-all shadow-md z-20"></div>
+                <div class="swiper-pagination unitDetail-pagination"></div>
               </div>
             </div>
           </div>
@@ -1258,16 +1248,15 @@
 
   <!-- JS SCRIPTS -->
   <script>
-    // URL GOOGLE APPS SCRIPT
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPS5JtpSUf2yshiG2mgJydhTNOAg0eUpkZrVZsw335IOB-YRw0wanpnfQprbRvhzI3/exec';
-
-    // DIRECT URL PDF BROSUR
-    const BROCHURE_URLS = {
-      'SSP SALTRIVER - 2 Lantai': 'https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%202%20Lantai%20-%20SSP%20Saltriver.pdf',
-      'SSP SALTRIVER - 3 Lantai': 'https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%203%20Lantai%20-%20SSP%20Saltriver.pdf'
-    };
-
+    let selectedTenor = 15;
     let isBookNowTracked = false;
+
+    // Helper formatting angka ke Rupiah
+    function formatRupiah(number) {
+      return 'Rp ' + Math.round(number).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    // Meta Pixel Tracker
     function trackMetaPixelBookNow() {
       if (!isBookNowTracked) {
         if (typeof fbq === 'function') {
@@ -1277,69 +1266,51 @@
       }
     }
 
-    // Custom Toast Notification System
-    function showToast(message, type = 'success') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `toast-enter pointer-events-auto p-4 rounded-2xl shadow-xl border flex items-center justify-between gap-3 text-sm font-semibold text-white ${type === 'success' ? 'bg-[#0b6b6d] border-[#11a1a5]' : 'bg-red-600 border-red-700'}`;
-      toast.innerHTML = `
-        <div class="flex items-center gap-2">
-          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span>${message}</span>
-        </div>
-        <button onclick="this.parentElement.remove()" class="text-white/80 hover:text-white">&times;</button>
-      `;
-      container.appendChild(toast);
-      setTimeout(() => {
-        if (toast.parentElement) toast.remove();
-      }, 5000);
-    }
-
     // Modal Master Plan Control
     function openMasterPlanModal() {
-      document.getElementById('masterPlanModal').classList.remove('hidden');
+      const modal = document.getElementById('masterPlanModal');
+      if (modal) modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       trackMetaPixelBookNow();
     }
 
     function closeMasterPlanModal() {
-      document.getElementById('masterPlanModal').classList.add('hidden');
+      const modal = document.getElementById('masterPlanModal');
+      if (modal) modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
 
     // Modal Brochure Control
     function openBrochureModal() {
-      document.getElementById('brochureModal').classList.remove('hidden');
+      const modal = document.getElementById('brochureModal');
+      if (modal) modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       trackMetaPixelBookNow();
     }
 
     function closeBrochureModal() {
-      document.getElementById('brochureModal').classList.add('hidden');
+      const modal = document.getElementById('brochureModal');
+      if (modal) modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
 
-    // Lightbox Control
-    function openLightbox(imgSrc, caption) {
-      document.getElementById('lightboxImage').src = imgSrc;
-      document.getElementById('lightboxCaption').innerText = caption || '';
-      document.getElementById('lightboxModal').classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-      document.getElementById('lightboxModal').classList.add('hidden');
-      document.body.style.overflow = '';
-    }
+    // Google Apps Script & Brochure Submit Handler
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyPS5JtpSUf2yshiG2mgJydhTNOAg0eUpkZrVZsw335IOB-YRw0wanpnfQprbRvhzI3/exec';
+    const BROCHURE_URLS = {
+      'SSP SALTRIVER - 2 Lantai': 'https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%202%20Lantai%20-%20SSP%20Saltriver.pdf',
+      'SSP SALTRIVER - 3 Lantai': 'https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/main/Asset/BROSUR%20Rumah%203%20Lantai%20-%20SSP%20Saltriver.pdf'
+    };
 
     function handleBrochureSubmit(e) {
       e.preventDefault();
       const form = e.target;
       const submitBtn = form.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn.innerText;
+      const originalBtnText = submitBtn ? submitBtn.innerText : '';
 
-      submitBtn.disabled = true;
-      submitBtn.innerText = "MENGIRIM DATA...";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerText = "MENGIRIM...";
+      }
 
       const formData = new FormData(form);
       const selectedProperty = formData.get('property');
@@ -1349,7 +1320,7 @@
         body: formData
       })
       .then(response => {
-        showToast("Terima kasih! Data Anda berhasil disimpan dan brosur PDF sedang diunduh.", 'success');
+        showToast("Terima kasih! Data Anda berhasil disimpan dan brosur SSP Saltriver sedang diunduh.");
 
         const pdfUrl = BROCHURE_URLS[selectedProperty] || BROCHURE_URLS['SSP SALTRIVER - 2 Lantai'];
         if (pdfUrl) {
@@ -1364,30 +1335,31 @@
 
         form.reset();
         closeBrochureModal();
-        
-        setTimeout(() => {
-          window.open('https://wa.me/6282343505823?text=Halo,%20saya%20sudah%20mengisi%20form%20brosur%20SSP%20Saltriver', '_blank');
-        }, 1000);
+        window.open('https://wa.me/6282343505823?text=Halo,%20saya%20sudah%20mengisi%20form%20brosur%20SSP%20Saltriver', '_blank');
       })
       .catch(error => {
         console.error('Error!', error.message);
-        showToast("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.", 'error');
+        showToast("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
       })
       .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.innerText = originalBtnText;
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+        }
       });
     }
 
     // Modal Floor Plan Control
     function openFloorPlanModal() {
-      document.getElementById('floorPlanModal').classList.remove('hidden');
+      const modal = document.getElementById('floorPlanModal');
+      if (modal) modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       switchFloorPlan(1);
     }
 
     function closeFloorPlanModal() {
-      document.getElementById('floorPlanModal').classList.add('hidden');
+      const modal = document.getElementById('floorPlanModal');
+      if (modal) modal.classList.add('hidden');
       document.body.style.overflow = '';
     }
 
@@ -1397,64 +1369,113 @@
       const btn2 = document.getElementById('tabLantai2');
 
       if (floor === 1) {
-        img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-1.jpg";
-        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
-        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
+        if (img) img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-1.jpg";
+        if (btn1) btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
+        if (btn2) btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
       } else {
-        img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-2.jpg";
-        btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
-        btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
+        if (img) img.src = "https://raw.githubusercontent.com/gerryramdani-star/ssp-saltriver/refs/heads/main/Asset/Lantai-2.jpg";
+        if (btn2) btn2.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-[#0e273c] text-white transition-all cursor-pointer";
+        if (btn1) btn1.className = "px-4 py-1.5 rounded-full text-xs font-bold bg-gray-200 text-gray-700 hover:bg-gray-300 transition-all cursor-pointer";
       }
     }
 
-    // KPR Calculator Logic
-    let currentTenor = 15;
-
-    function formatRupiah(num) {
-      return 'Rp ' + Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    // Modal Lightbox Control
+    function openLightbox(imageUrl, caption) {
+      const lightboxModal = document.getElementById('lightboxModal');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      if (lightboxModal && lightboxImage && lightboxCaption) {
+        lightboxImage.src = imageUrl;
+        lightboxCaption.innerText = caption || '';
+        lightboxModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
     }
 
+    function closeLightbox() {
+      const lightboxModal = document.getElementById('lightboxModal');
+      if (lightboxModal) {
+        lightboxModal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // Toast Notification System
+    function showToast(message) {
+      const container = document.getElementById('toast-container');
+      if (!container) {
+        alert(message);
+        return;
+      }
+      const toast = document.createElement('div');
+      toast.className = 'bg-[#0b6b6d] text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 text-sm font-semibold pointer-events-auto toast-enter border border-white/20';
+      toast.innerHTML = `
+        <svg class="w-5 h-5 text-teal-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.remove();
+      }, 4000);
+    }
+
+    // Mengubah tenor aktif
     function setTenor(tenor) {
-      currentTenor = tenor;
-      document.querySelectorAll('.tenor-btn').forEach(btn => {
-        btn.className = "tenor-btn py-2.5 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 transition-all hover:bg-gray-50";
+      selectedTenor = tenor;
+      [10, 15, 20, 25].forEach(t => {
+        const btn = document.getElementById(`tenor${t}`);
+        if (btn) {
+          if (t === tenor) {
+            btn.className = "tenor-btn py-2.5 rounded-xl border border-[#0b6b6d] bg-[#0b6b6d] text-xs font-bold text-white transition-all";
+          } else {
+            btn.className = "tenor-btn py-2.5 rounded-xl border border-gray-200 text-xs font-bold text-gray-700 transition-all hover:bg-gray-50";
+          }
+        }
       });
-      const activeBtn = document.getElementById(`tenor${tenor}`);
-      if (activeBtn) {
-        activeBtn.className = "tenor-btn py-2.5 rounded-xl border border-[#0b6b6d] bg-[#0b6b6d] text-xs font-bold text-white transition-all";
-      }
       calculateKPR();
     }
 
+    // Kalkulasi Angsuran KPR dengan Metode Anuitas
     function calculateKPR() {
-      const price = parseFloat(document.getElementById('kprPrice').value) || 932000000;
-      const dpPercent = parseFloat(document.getElementById('kprDp').value) || 10;
-      const interestRate = parseFloat(document.getElementById('kprInterest').value) || 6.5;
+      const priceInput = document.getElementById('kprPrice');
+      const dpInput = document.getElementById('kprDp');
+      const interestInput = document.getElementById('kprInterest');
+
+      if (!priceInput || !dpInput || !interestInput) return;
+
+      const price = parseFloat(priceInput.value) || 0;
+      const dpPercent = parseFloat(dpInput.value) || 0;
+      const interestRate = parseFloat(interestInput.value) || 0;
 
       const dpAmount = price * (dpPercent / 100);
       const loanAmount = price - dpAmount;
 
-      document.getElementById('kprPriceText').innerText = formatRupiah(price);
-      document.getElementById('kprDpText').innerText = `${dpPercent}% (${formatRupiah(dpAmount)})`;
-      document.getElementById('kprInterestText').innerText = `${interestRate}%`;
-
-      // Monthly Interest Anuity Formula
       const monthlyRate = (interestRate / 100) / 12;
-      const totalMonths = currentTenor * 12;
-      
+      const totalMonths = selectedTenor * 12;
+
       let monthlyInstallment = 0;
-      if (monthlyRate > 0) {
+      if (monthlyRate > 0 && totalMonths > 0) {
         monthlyInstallment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / (Math.pow(1 + monthlyRate, totalMonths) - 1);
-      } else {
+      } else if (totalMonths > 0) {
         monthlyInstallment = loanAmount / totalMonths;
       }
 
-      document.getElementById('kprResultMonthly').innerText = formatRupiah(monthlyInstallment);
-      document.getElementById('kprResultLoan').innerText = formatRupiah(loanAmount);
-      document.getElementById('kprResultDP').innerText = formatRupiah(dpAmount);
+      // Update Tampilan DOM
+      const priceText = document.getElementById('kprPriceText');
+      const dpText = document.getElementById('kprDpText');
+      const interestText = document.getElementById('kprInterestText');
+      const resultMonthly = document.getElementById('kprResultMonthly');
+      const resultLoan = document.getElementById('kprResultLoan');
+      const resultDP = document.getElementById('kprResultDP');
+
+      if (priceText) priceText.innerText = formatRupiah(price);
+      if (dpText) dpText.innerText = `${dpPercent}% (${formatRupiah(dpAmount)})`;
+      if (interestText) interestText.innerText = `${interestRate}%`;
+      if (resultMonthly) resultMonthly.innerText = formatRupiah(monthlyInstallment);
+      if (resultLoan) resultLoan.innerText = formatRupiah(loanAmount);
+      if (resultDP) resultDP.innerText = formatRupiah(dpAmount);
     }
 
-    // Initialize Swiper Sliders
     function initGallerySlider() {
       if (typeof Swiper !== 'undefined') {
         new Swiper(".gallerySwiper", {
@@ -1489,12 +1510,12 @@
             disableOnInteraction: false,
           },
           pagination: {
-            el: ".unitDetailSwiper .swiper-pagination",
+            el: ".unitDetail-pagination",
             clickable: true,
           },
           navigation: {
-            nextEl: ".unitDetailSwiper .swiper-button-next",
-            prevEl: ".unitDetailSwiper .swiper-button-prev",
+            nextEl: ".unitDetail-next",
+            prevEl: ".unitDetail-prev",
           },
         });
 
